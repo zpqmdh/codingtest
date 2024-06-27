@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>코딩 테스트 채점 서버</title>
+    <style>
+        div, li {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        body {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        #problem-description {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+        }
+        #code-editor {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        textarea {
+            flex: 1;
+            width: 100%;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        strong {
+            font-size: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div id="problem-description">
+    <div>
+        <strong>문제 설명</strong>
+    </div>
+    <div>
+        <p>
+            괄호가 바르게 짝지어졌다는 것은 '(' 문자로 열렸으면 반드시 짝지어서 ')' 문자로 닫혀야 한다는 뜻입니다.
+        </p>
+        <p>예를 들어</p>
+        <ul>
+            <li>"()()" 또는 "(())()" 는 올바른 괄호입니다.</li>
+            <li>")()(" 또는 "(()(" 는 올바르지 않은 괄호입니다.</li>
+        </ul>
+        <p>
+            '(' 또는 ')' 로만 이루어진 문자열 s가 주어졌을 때, 문자열 s가 올바른 괄호이면 true를 반환하고, 올바르지 않은 괄호이면 false를 반환하는 solution 함수를 완성해 주세요.
+        </p>
+    </div>
+    <div>
+        <strong>제한사항</strong>
+    </div>
+    <div>
+        <ul>
+            <li>문자열 s의 길이: 100,000 이하의 자연수</li>
+            <li>문자열 s는 '(' 또는 ')' 로만 이루어져 있습니다.</li>
+        </ul>
+    </div>
+    <div>
+        <strong>예시</strong>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>s</th>
+            <th>answer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>()()</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>(())()</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>)()(</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>(()(</td>
+            <td>false</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <strong>입출력 예 설명</strong>
+    </div>
+    <div>
+        입출력 예 #1,2,3,4<br/>
+        문제의 예시와 같습니다.
+    </div>
+</div>
+<div id="code-editor">
+    <textarea id="code" placeholder="여기에 코드를 입력하세요">import java.util.*;
+        class Solution {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            String s = sc.nextLine();
+            boolean result = solution(s);
+            System.out.println(result);
+        }
+        public static boolean solution(String s) {
+            boolean answer = true;
+            System.out.println("Hello Java");
+            return answer;
+        }
+}
+    </textarea>
+    <button onclick="submitCode()">제출</button>
+</div>
+<script>
+    function submitCode() {
+        const code = document.getElementById('code').value;
+        const jsonData = { user: "ssafy", code: code };
+
+        fetch('http://localhost:8080/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+</body>
+</html>
